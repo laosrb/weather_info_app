@@ -1,3 +1,8 @@
+/**
+ * Name: Huu Nguyen
+ * Partner: Ryan Bouapheng 
+ */
+
 import 'package:flutter/material.dart';
 import 'dart:math';
 
