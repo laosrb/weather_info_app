@@ -118,9 +118,19 @@ class _WeatherHomePageState extends State<WeatherHomePage>
                   backgroundColor: Colors.blue,
                   foregroundColor: Colors.white,
                   padding: const EdgeInsets.symmetric(vertical: 15),
+                  elevation: 5,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
                 ),
-                child:
-                    const Text('Fetch Weather', style: TextStyle(fontSize: 16)),
+                child: const Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(Icons.cloud_outlined),
+                    SizedBox(width: 8),
+                    Text('Fetch Weather', style: TextStyle(fontSize: 16)),
+                  ],
+                ),
               ),
               const SizedBox(height: 40),
               ScaleTransition(
@@ -129,16 +139,27 @@ class _WeatherHomePageState extends State<WeatherHomePage>
                   curve: Curves.easeInOut,
                 ),
                 child: Card(
-                  elevation: 8,
+                  elevation: 12,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(15),
+                  ),
                   child: Container(
                     decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(15),
                       gradient: LinearGradient(
                         colors: [Colors.white, Colors.blue.withOpacity(0.2)],
                         begin: Alignment.topLeft,
                         end: Alignment.bottomRight,
                       ),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.blue.withOpacity(0.2),
+                          blurRadius: 15,
+                          offset: const Offset(0, 5),
+                        ),
+                      ],
                     ),
-                    padding: const EdgeInsets.all(16.0),
+                    padding: const EdgeInsets.all(20.0),
                     child: Column(
                       children: [
                         const Text(
@@ -146,15 +167,21 @@ class _WeatherHomePageState extends State<WeatherHomePage>
                           style: TextStyle(
                             fontSize: 24,
                             fontWeight: FontWeight.bold,
+                            letterSpacing: 1.2,
                           ),
                         ),
                         const SizedBox(height: 20),
                         Text(
                           _weatherEmojis[_condition] ?? '❓',
-                          style: const TextStyle(fontSize: 50),
+                          style: const TextStyle(fontSize: 60),
                         ),
-                        Text('City: $_cityName',
-                            style: const TextStyle(fontSize: 18)),
+                        Text(
+                          'City: $_cityName',
+                          style: const TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
                         const SizedBox(height: 10),
                         Text(
                           'Temperature: ${_temperature.toStringAsFixed(1)}°C',
