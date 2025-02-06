@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'dart:math';
 
 void main() {
   runApp(const MyApp());
@@ -29,6 +30,21 @@ class WeatherHomePage extends StatefulWidget {
 
 class _WeatherHomePageState extends State<WeatherHomePage> {
   final TextEditingController _cityController = TextEditingController();
+  String _cityName = '--';
+  double _temperature = 0;
+  String _condition = '--';
+
+  final List<String> _conditions = ['Sunny', 'Cloudy', 'Rainy'];
+
+  void _fetchWeather() {
+    final random = Random();
+    setState(() {
+      _cityName =
+          _cityController.text.isEmpty ? 'Unknown' : _cityController.text;
+      _temperature = 15 + random.nextDouble() * 15; // Random between 15-30
+      _condition = _conditions[random.nextInt(_conditions.length)];
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -52,30 +68,28 @@ class _WeatherHomePageState extends State<WeatherHomePage> {
             ),
             const SizedBox(height: 20),
             ElevatedButton(
-              onPressed: () {
-                // Will implement weather fetching later
-              },
+              onPressed: _fetchWeather,
               child: const Text('Fetch Weather'),
             ),
             const SizedBox(height: 40),
-            const Card(
+            Card(
               child: Padding(
-                padding: EdgeInsets.all(16.0),
+                padding: const EdgeInsets.all(16.0),
                 child: Column(
                   children: [
-                    Text(
+                    const Text(
                       'Weather Information',
                       style: TextStyle(
                         fontSize: 24,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    SizedBox(height: 20),
-                    Text('City: --'),
-                    SizedBox(height: 10),
-                    Text('Temperature: -- °C'),
-                    SizedBox(height: 10),
-                    Text('Condition: --'),
+                    const SizedBox(height: 20),
+                    Text('City: $_cityName'),
+                    const SizedBox(height: 10),
+                    Text('Temperature: ${_temperature.toStringAsFixed(1)}°C'),
+                    const SizedBox(height: 10),
+                    Text('Condition: $_condition'),
                   ],
                 ),
               ),
